@@ -1,18 +1,18 @@
-"use client"
+"use client";
 
-import type React from "react"
-import { useState, useEffect, useRef } from "react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Mail, Phone, MapPin, Send, Clock, CheckCircle } from "lucide-react"
+import type React from "react";
+import { useState, useEffect, useRef } from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Mail, Phone, MapPin, Send, Clock, CheckCircle } from "lucide-react";
 
 export function Contact() {
-  const [isVisible, setIsVisible] = useState(false)
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isSubmitted, setIsSubmitted] = useState(false)
-  const sectionRef = useRef<HTMLElement>(null)
+  const [isVisible, setIsVisible] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -20,34 +20,34 @@ export function Contact() {
     company: "",
     subject: "",
     message: "",
-  })
+  });
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsVisible(true)
+          setIsVisible(true);
         }
       },
-      { threshold: 0.1 },
-    )
+      { threshold: 0.1 }
+    );
 
     if (sectionRef.current) {
-      observer.observe(sectionRef.current)
+      observer.observe(sectionRef.current);
     }
 
-    return () => observer.disconnect()
-  }, [])
+    return () => observer.disconnect();
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
+    e.preventDefault();
+    setIsSubmitting(true);
 
     // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 2000))
+    await new Promise((resolve) => setTimeout(resolve, 2000));
 
-    setIsSubmitting(false)
-    setIsSubmitted(true)
+    setIsSubmitting(false);
+    setIsSubmitted(true);
 
     // Reset form after success animation
     setTimeout(() => {
@@ -57,41 +57,47 @@ export function Contact() {
         company: "",
         subject: "",
         message: "",
-      })
-      setIsSubmitted(false)
-    }, 3000)
-  }
+      });
+      setIsSubmitted(false);
+    }, 3000);
+  };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
-    })
-  }
+    });
+  };
 
   const contactInfo = [
     {
       icon: Mail,
       title: "Email Us",
-      details: ["hello@komprotech.com", "support@komprotech.com"],
+      details: ["comprotechofficial@gmail.com"],
       color: "from-blue-500 to-cyan-500",
     },
     {
       icon: Phone,
       title: "Call Us",
-      details: ["+1 (555) 123-4567", "Mon-Fri 9AM-6PM EST"],
+      details: ["62894 33412", "Mon-Fri 9AM-6PM"],
       color: "from-green-500 to-emerald-500",
     },
     {
       icon: MapPin,
       title: "Visit Us",
-      details: ["123 Innovation Drive", "Tech City, TC 12345"],
+      details: ["Kolkata, West Bengal"],
       color: "from-purple-500 to-violet-500",
     },
-  ]
+  ];
 
   return (
-    <section id="contact" ref={sectionRef} className="py-20 bg-white relative overflow-hidden">
+    <section
+      id="contact"
+      ref={sectionRef}
+      className="py-20 bg-white relative overflow-hidden"
+    >
       {/* Animated Background */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-20 left-20 w-32 h-32 bg-orange-300 rounded-full animate-pulse"></div>
@@ -111,10 +117,12 @@ export function Contact() {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
         >
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">Get In Touch</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">
+            Get In Touch
+          </h2>
           <p className="text-xl text-gray-600 leading-relaxed">
-            Ready to transform your ideas into reality? We'd love to hear from you. Let's discuss how we can help bring
-            your vision to life.
+            Ready to transform your ideas into reality? We'd love to hear from
+            you. Let's discuss how we can help bring your vision to life.
           </p>
         </div>
 
@@ -122,7 +130,9 @@ export function Contact() {
           <div className="lg:col-span-2">
             <Card
               className={`p-8 border-2 hover:border-orange-200 transition-all duration-700 hover:shadow-xl relative overflow-hidden ${
-                isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"
+                isVisible
+                  ? "opacity-100 translate-x-0"
+                  : "opacity-0 -translate-x-10"
               }`}
               style={{ transitionDelay: "0.2s" }}
             >
@@ -270,12 +280,14 @@ export function Contact() {
 
           <div className="space-y-8">
             {contactInfo.map((info, index) => {
-              const Icon = info.icon
+              const Icon = info.icon;
               return (
                 <Card
                   key={index}
                   className={`p-6 border-2 hover:border-orange-200 transition-all duration-700 hover:shadow-xl transform hover:scale-105 group relative overflow-hidden ${
-                    isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10"
+                    isVisible
+                      ? "opacity-100 translate-x-0"
+                      : "opacity-0 translate-x-10"
                   }`}
                   style={{ transitionDelay: `${0.4 + index * 0.1}s` }}
                 >
@@ -307,22 +319,27 @@ export function Contact() {
                     </div>
                   </CardContent>
                 </Card>
-              )
+              );
             })}
 
             <div
               className={`bg-gradient-to-br from-orange-50 to-red-50 rounded-lg p-6 border border-orange-100 transition-all duration-700 ${
-                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+                isVisible
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-10"
               }`}
               style={{ transitionDelay: "0.8s" }}
             >
               <div className="flex items-start space-x-3">
                 <Clock className="h-6 w-6 text-orange-500 mt-1" />
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-3">Quick Response Guarantee</h3>
+                  <h3 className="font-semibold text-gray-900 mb-3">
+                    Quick Response Guarantee
+                  </h3>
                   <p className="text-sm text-gray-600 leading-relaxed">
-                    We typically respond to all inquiries within 24 hours. For urgent matters, please call us directly
-                    or mention "URGENT" in your subject line.
+                    We typically respond to all inquiries within 24 hours. For
+                    urgent matters, please call us directly or mention "URGENT"
+                    in your subject line.
                   </p>
                 </div>
               </div>
@@ -331,5 +348,5 @@ export function Contact() {
         </div>
       </div>
     </section>
-  )
+  );
 }

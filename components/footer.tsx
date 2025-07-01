@@ -1,19 +1,27 @@
-"use client"
+"use client";
 
-import { Mail, Phone, MapPin, Linkedin, Twitter, Github, ArrowUp } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Linkedin,
+  Twitter,
+  Github,
+  ArrowUp,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export function Footer() {
   const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId)
+    const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" })
+      element.scrollIntoView({ behavior: "smooth" });
     }
-  }
+  };
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" })
-  }
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   return (
     <footer className="bg-gray-900 text-white relative overflow-hidden">
@@ -29,14 +37,17 @@ export function Footer() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div className="lg:col-span-2">
-            <div className="group cursor-pointer mb-6" onClick={() => scrollToSection("home")}>
+            <div
+              className="group cursor-pointer mb-6"
+              onClick={() => scrollToSection("home")}
+            >
               <h3 className="text-2xl font-bold group-hover:text-orange-500 transition-colors duration-300">
                 Komprotech
               </h3>
             </div>
             <p className="text-gray-300 mb-6 leading-relaxed max-w-md">
-              Revolutionizing tech product delivery by bringing innovative ideas to life. Our mission: "Work for us
-              means Work for others."
+              Revolutionizing tech product delivery by bringing innovative ideas
+              to life. Our mission: "Work for us means Work for others."
             </p>
             <div className="flex space-x-4">
               <a
@@ -64,7 +75,13 @@ export function Footer() {
           <div>
             <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
             <ul className="space-y-3">
-              {["home", "about", "services", "why-choose-us", "collaborations"].map((section) => (
+              {[
+                "home",
+                "about",
+                "services",
+                "why-choose-us",
+                "collaborations",
+              ].map((section) => (
                 <li key={section}>
                   <button
                     onClick={() => scrollToSection(section)}
@@ -72,7 +89,9 @@ export function Footer() {
                   >
                     {section
                       .split("-")
-                      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                      .map(
+                        (word) => word.charAt(0).toUpperCase() + word.slice(1)
+                      )
                       .join(" ")}
                   </button>
                 </li>
@@ -92,15 +111,13 @@ export function Footer() {
               <li className="flex items-center space-x-3 group">
                 <Phone className="h-5 w-5 text-orange-500 group-hover:scale-110 transition-transform duration-300" />
                 <span className="text-gray-300 group-hover:text-white transition-colors duration-300">
-                  +1 (555) 123-4567
+                  62894 33412
                 </span>
               </li>
               <li className="flex items-start space-x-3 group">
                 <MapPin className="h-5 w-5 text-orange-500 mt-1 group-hover:scale-110 transition-transform duration-300" />
                 <span className="text-gray-300 group-hover:text-white transition-colors duration-300">
-                  123 Innovation Drive
-                  <br />
-                  Tech City, TC 12345
+                  Kolkata, West Bengal
                 </span>
               </li>
             </ul>
@@ -109,16 +126,27 @@ export function Footer() {
 
         <div className="border-t border-gray-800 mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-400 text-sm">© 2024 Komprotech. All rights reserved.</p>
+            <p className="text-gray-400 text-sm">
+              © 2024 Komprotech. All rights reserved.
+            </p>
             <div className="flex items-center space-x-6 mt-4 md:mt-0">
               <div className="flex space-x-6">
-                <a href="#" className="text-gray-400 hover:text-orange-500 text-sm transition-colors duration-300">
+                <a
+                  href="#"
+                  className="text-gray-400 hover:text-orange-500 text-sm transition-colors duration-300"
+                >
                   Privacy Policy
                 </a>
-                <a href="#" className="text-gray-400 hover:text-orange-500 text-sm transition-colors duration-300">
+                <a
+                  href="#"
+                  className="text-gray-400 hover:text-orange-500 text-sm transition-colors duration-300"
+                >
                   Terms of Service
                 </a>
-                <a href="#" className="text-gray-400 hover:text-orange-500 text-sm transition-colors duration-300">
+                <a
+                  href="#"
+                  className="text-gray-400 hover:text-orange-500 text-sm transition-colors duration-300"
+                >
                   Cookie Policy
                 </a>
               </div>
@@ -134,5 +162,5 @@ export function Footer() {
         </div>
       </div>
     </footer>
-  )
+  );
 }

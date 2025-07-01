@@ -1,119 +1,142 @@
-"use client"
+"use client";
 
-import { useState, useEffect, useRef } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Truck, BarChart3, Settings, Code, Database, Smartphone, ArrowRight } from "lucide-react"
+import { useState, useEffect, useRef } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import {
+  BarChart3,
+  Code,
+  Database,
+  Smartphone,
+  ArrowRight,
+  Gamepad2,
+  Search,
+  FileText,
+  PenTool,
+} from "lucide-react";
 
 export function Services() {
-  const [isVisible, setIsVisible] = useState(false)
-  const [hoveredCard, setHoveredCard] = useState<number | null>(null)
-  const sectionRef = useRef<HTMLElement>(null)
+  const [isVisible, setIsVisible] = useState(false);
+  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+  const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsVisible(true)
+          setIsVisible(true);
         }
       },
-      { threshold: 0.1 },
-    )
+      { threshold: 0.1 }
+    );
 
     if (sectionRef.current) {
-      observer.observe(sectionRef.current)
+      observer.observe(sectionRef.current);
     }
 
-    return () => observer.disconnect()
-  }, [])
+    return () => observer.disconnect();
+  }, []);
 
   const services = [
     {
       icon: Code,
-      title: "Software Development for Logistics Automation",
+      title: "Software Development",
       description:
-        "Custom software solutions that streamline logistics operations, reduce manual processes, and increase operational efficiency.",
+        "End-to-end custom software development tailored to your business needs, delivering scalable and efficient digital solutions.",
       features: [
-        "Automated workflow management",
-        "Real-time inventory tracking",
-        "Supply chain optimization",
-        "Integration with existing systems",
+        "Bespoke web & desktop apps",
+        "Third-party API integrations",
+        "Secure backend development",
+        "Scalable system architecture",
       ],
       color: "from-blue-500 to-cyan-500",
     },
     {
       icon: BarChart3,
-      title: "Intelligent Tracking Solutions",
+      title: "Intelligent Solutions",
       description:
-        "Advanced tracking systems powered by AI and machine learning to provide real-time visibility and predictive analytics.",
+        "Smart solutions powered by AI, machine learning, and automation to solve complex business problems and enhance decision-making.",
       features: [
-        "Real-time GPS tracking",
-        "Predictive delivery analytics",
-        "Route optimization algorithms",
-        "Performance monitoring dashboards",
+        "AI-powered automation",
+        "Predictive analytics",
+        "Business process intelligence",
+        "Custom ML model deployment",
       ],
       color: "from-green-500 to-emerald-500",
     },
     {
-      icon: Settings,
-      title: "Delivery Optimization Strategies",
-      description:
-        "Data-driven strategies and tools to optimize delivery routes, reduce costs, and improve customer satisfaction.",
-      features: [
-        "Route planning algorithms",
-        "Cost reduction analysis",
-        "Customer satisfaction metrics",
-        "Performance optimization tools",
-      ],
-      color: "from-purple-500 to-violet-500",
-    },
-    {
-      icon: Database,
-      title: "Data Analytics & Insights",
-      description:
-        "Transform your logistics data into actionable insights with our advanced analytics and reporting solutions.",
-      features: [
-        "Custom dashboard creation",
-        "Predictive analytics",
-        "Performance reporting",
-        "Business intelligence tools",
-      ],
-      color: "from-orange-500 to-red-500",
-    },
-    {
       icon: Smartphone,
-      title: "Mobile Application Development",
+      title: "Mobile Application",
       description:
-        "User-friendly mobile applications for drivers, customers, and administrators to manage logistics operations on-the-go.",
+        "Design and development of high-performance mobile apps with smooth user experience across Android and iOS platforms.",
       features: [
-        "Cross-platform compatibility",
-        "Real-time notifications",
-        "Offline functionality",
-        "Intuitive user interfaces",
+        "Cross-platform development",
+        "Intuitive UI/UX design",
+        "Real-time data sync",
+        "Push notifications & APIs",
       ],
       color: "from-pink-500 to-rose-500",
     },
     {
-      icon: Truck,
-      title: "Fleet Management Systems",
+      icon: Gamepad2,
+      title: "Game Development",
       description:
-        "Comprehensive fleet management solutions to monitor, maintain, and optimize your vehicle operations.",
+        "Creative and engaging game development solutions for mobile, web, and desktop platforms using the latest gaming engines.",
       features: [
-        "Vehicle tracking and monitoring",
-        "Maintenance scheduling",
-        "Driver performance analytics",
-        "Fuel efficiency optimization",
+        "2D & 3D game creation",
+        "Unity/Unreal Engine support",
+        "Multiplayer integration",
+        "Interactive UI & storytelling",
+      ],
+      color: "from-yellow-500 to-orange-500",
+    },
+    {
+      icon: Search,
+      title: "SEO",
+      description:
+        "Boost your online visibility and drive organic traffic with proven SEO strategies tailored to your business goals.",
+      features: [
+        "Keyword research & optimization",
+        "On-page & off-page SEO",
+        "Technical SEO audit",
+        "Monthly performance reports",
       ],
       color: "from-indigo-500 to-blue-500",
     },
-  ]
+    {
+      icon: FileText,
+      title: "Content Creation",
+      description:
+        "Professional content creation services that capture your brand voice and engage your target audience effectively.",
+      features: [
+        "SEO-optimized blogs & articles",
+        "Scriptwriting & storytelling",
+        "Social media content",
+        "Copywriting for landing pages",
+      ],
+      color: "from-purple-500 to-violet-500",
+    },
+    {
+      icon: PenTool,
+      title: "Logo Design",
+      description:
+        "Unique, memorable, and scalable logo designs that represent your brand identity across all platforms.",
+      features: [
+        "Custom vector logos",
+        "Brand guidelines creation",
+        "Multiple design concepts",
+        "High-res & source files provided",
+      ],
+      color: "from-red-500 to-pink-500",
+    },
+  ];
 
   const scrollToContact = () => {
-    const element = document.getElementById("contact")
+    const element = document.getElementById("contact");
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" })
+      element.scrollIntoView({ behavior: "smooth" });
     }
-  }
+  };
 
   return (
     <section
@@ -140,22 +163,31 @@ export function Services() {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
         >
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">Our Services</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">
+            Our Services
+          </h2>
           <p className="text-xl text-gray-600 leading-relaxed">
-            We offer comprehensive tech solutions designed to transform your logistics operations and drive business
-            growth through innovation and efficiency.
+            We offer comprehensive tech solutions designed to transform your
+            logistics operations and drive business growth through innovation
+            and efficiency.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
           {services.map((service, index) => {
-            const Icon = service.icon
+            const Icon = service.icon;
             return (
               <Card
                 key={index}
                 className={`h-full transition-all duration-500 transform hover:scale-105 cursor-pointer group relative overflow-hidden ${
-                  isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-                } ${hoveredCard === index ? "shadow-2xl" : "shadow-lg hover:shadow-xl"}`}
+                  isVisible
+                    ? "opacity-100 translate-y-0"
+                    : "opacity-0 translate-y-10"
+                } ${
+                  hoveredCard === index
+                    ? "shadow-2xl"
+                    : "shadow-lg hover:shadow-xl"
+                }`}
                 style={{
                   transitionDelay: `${index * 0.1}s`,
                 }}
@@ -174,7 +206,9 @@ export function Services() {
                     >
                       <Icon className="h-8 w-8 text-white" />
                     </div>
-                    <div className={`w-2 h-2 rounded-full bg-gradient-to-r ${service.color} animate-pulse`}></div>
+                    <div
+                      className={`w-2 h-2 rounded-full bg-gradient-to-r ${service.color} animate-pulse`}
+                    ></div>
                   </div>
                   <CardTitle className="text-xl text-gray-900 group-hover:text-gray-800 transition-colors duration-300">
                     {service.title}
@@ -202,7 +236,7 @@ export function Services() {
                   </ul>
                 </CardContent>
               </Card>
-            )
+            );
           })}
         </div>
 
@@ -214,9 +248,12 @@ export function Services() {
           style={{ transitionDelay: "0.8s" }}
         >
           <div className="bg-white rounded-2xl p-8 shadow-xl border border-gray-100 max-w-2xl mx-auto">
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">Ready to Transform Your Operations?</h3>
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">
+              Ready to Transform Your Operations?
+            </h3>
             <p className="text-gray-600 mb-6 leading-relaxed">
-              Let's discuss how our innovative solutions can streamline your logistics and drive your business forward.
+              Let's discuss how our innovative solutions can streamline your
+              logistics and drive your business forward.
             </p>
             <Button
               onClick={scrollToContact}
@@ -229,5 +266,5 @@ export function Services() {
         </div>
       </div>
     </section>
-  )
+  );
 }
