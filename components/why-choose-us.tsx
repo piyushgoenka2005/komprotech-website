@@ -2,11 +2,22 @@
 
 import { useState, useEffect, useRef } from "react"
 import { Card, CardContent } from "@/components/ui/card"
-import { Clock, Shield, Users, Zap, Award, HeartHandshake, CheckCircle } from "lucide-react"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Badge } from "@/components/ui/badge"
+import { 
+  CheckCircle, 
+  Users, 
+  Globe, 
+  Trophy, 
+  Star,
+  ChevronLeft,
+  ChevronRight,
+  Sparkles
+} from "lucide-react"
 
 export function WhyChooseUs() {
   const [isVisible, setIsVisible] = useState(false)
-  const [activeCard, setActiveCard] = useState(0)
+  const [currentTestimonial, setCurrentTestimonial] = useState(0)
   const sectionRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
@@ -16,7 +27,7 @@ export function WhyChooseUs() {
           setIsVisible(true)
         }
       },
-      { threshold: 0.1 },
+      { threshold: 0.1 }
     )
 
     if (sectionRef.current) {
@@ -26,174 +37,297 @@ export function WhyChooseUs() {
     return () => observer.disconnect()
   }, [])
 
+  // Auto-rotate testimonials
   useEffect(() => {
-    if (isVisible) {
-      const interval = setInterval(() => {
-        setActiveCard((prev) => (prev + 1) % benefits.length)
-      }, 4000)
-      return () => clearInterval(interval)
-    }
-  }, [isVisible])
+    const interval = setInterval(() => {
+      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length)
+    }, 5000)
+    return () => clearInterval(interval)
+  }, [])
 
-  const benefits = [
+  const stats = [
     {
-      icon: Clock,
-      title: "Focus on What Matters",
-      description:
-        "We handle the technical complexity so you can focus on your career and personal life while your ideas come to life.",
-      color: "from-blue-500 to-cyan-500",
-    },
-    {
-      icon: Shield,
-      title: "Proven Expertise",
-      description: "Our team of experienced developers and engineers brings deep technical knowledge to every project.",
-      color: "from-green-500 to-emerald-500",
+      icon: CheckCircle,
+      value: "100+",
+      label: "Projects Completed",
+      description: "Successfully delivered projects across various industries",
+      color: "from-green-500 to-emerald-500"
     },
     {
       icon: Users,
-      title: "Collaborative Partnership",
-      description:
-        "We work closely with you throughout the development process, ensuring your vision is perfectly realized.",
-      color: "from-purple-500 to-violet-500",
+      value: "50+",
+      label: "Happy Clients",
+      description: "Satisfied clients who trust our expertise",
+      color: "from-blue-500 to-cyan-500"
     },
     {
-      icon: Zap,
-      title: "Rapid Development",
-      description: "Our streamlined processes and agile methodology ensure fast delivery without compromising quality.",
-      color: "from-orange-500 to-red-500",
+      icon: Globe,
+      value: "15+",
+      label: "Countries Served",
+      description: "Global reach with localized solutions",
+      color: "from-purple-500 to-pink-500"
     },
     {
-      icon: Award,
-      title: "Quality Assurance",
-      description: "Rigorous testing and quality control measures ensure your software meets the highest standards.",
-      color: "from-pink-500 to-rose-500",
-    },
-    {
-      icon: HeartHandshake,
-      title: "Long-term Support",
-      description: "We provide ongoing maintenance and support to ensure your solutions continue to perform optimally.",
-      color: "from-indigo-500 to-blue-500",
-    },
+      icon: Trophy,
+      value: "99%",
+      label: "Client Satisfaction",
+      description: "Exceptional service quality and results",
+      color: "from-orange-500 to-red-500"
+    }
   ]
 
-  const guarantees = ["Fast Delivery", "Quality Guaranteed", "Ongoing Support", "24/7 Availability"]
+  const features = [
+    {
+      title: "Lightning Fast Delivery",
+      description: "We deliver high-quality solutions in record time without compromising on quality.",
+      icon: "⚡"
+    },
+    {
+      title: "Expert Team",
+      description: "Our experienced developers and designers bring years of expertise to every project.",
+      icon: "👥"
+    },
+    {
+      title: "24/7 Support",
+      description: "Round-the-clock support to ensure your business never stops running smoothly.",
+      icon: "🛡️"
+    },
+    {
+      title: "Bank-level Security",
+      description: "Bank-level security protocols ensure your data and applications are always protected.",
+      icon: "🔒"
+    },
+    {
+      title: "Scalable Solutions",
+      description: "Build for today, scale for tomorrow with our future-proof technology stack.",
+      icon: "📈"
+    },
+    {
+      title: "Cost Effective",
+      description: "Get maximum value for your investment with our competitive pricing structure.",
+      icon: "💰"
+    }
+  ]
+
+  const testimonials = [
+    {
+      name: "Sarah Johnson",
+      role: "CEO, TechStart",
+      company: "TechStart Inc.",
+      content: "Komprotech transformed our business with their innovative solutions. The team's expertise and dedication are truly remarkable.",
+      avatar: "/placeholder-user.jpg",
+      rating: 5
+    },
+    {
+      name: "Michael Chen",
+      role: "CTO, Digital Solutions",
+      company: "Digital Solutions Ltd.",
+      content: "Working with Komprotech was a game-changer. They delivered beyond our expectations and helped us scale our platform globally.",
+      avatar: "/placeholder-user.jpg",
+      rating: 5
+    },
+    {
+      name: "Emily Davis",
+      role: "Founder, StartupX",
+      company: "StartupX",
+      content: "The quality of work and attention to detail from Komprotech is outstanding. They truly understand what businesses need.",
+      avatar: "/placeholder-user.jpg",
+      rating: 5
+    }
+  ]
+
+  const nextTestimonial = () => {
+    setCurrentTestimonial((prev) => (prev + 1) % testimonials.length)
+  }
+
+  const prevTestimonial = () => {
+    setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length)
+  }
 
   return (
-    <section id="why-choose-us" ref={sectionRef} className="py-20 bg-white relative overflow-hidden">
-      {/* Animated Background Pattern */}
-      <div className="absolute inset-0 opacity-5">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23f97316' fillOpacity='0.1'%3E%3Cpath d='M20 20c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10zm10 0c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10z'/%3E%3C/g%3E%3C/svg%3E")`,
-          }}
-        ></div>
-      </div>
-
+    <section
+      id="why-choose-us"
+      ref={sectionRef}
+      className="py-24 bg-white dark:bg-gray-950 relative overflow-hidden"
+    >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        {/* Header */}
         <div
-          className={`max-w-3xl mx-auto text-center mb-16 transition-all duration-1000 ${
+          className={`max-w-4xl mx-auto text-center mb-20 transition-all duration-1000 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
         >
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">Why Choose Komprotech?</h2>
-          <p className="text-xl text-gray-600 leading-relaxed">
-            We understand the challenges faced by working professionals and innovators. Let us provide the technical
-            expertise you need while you focus on what you do best.
+          <div className="inline-flex items-center gap-2 bg-gray-50 dark:bg-gray-800 text-gray-600 dark:text-gray-400 rounded-full px-4 py-2 text-sm font-medium mb-6">
+            <Sparkles className="w-4 h-4" />
+            Trusted by Industry Leaders
+          </div>
+          
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+            Why Choose Komprotech?
+          </h2>
+          
+          <p className="text-xl sm:text-2xl text-gray-600 dark:text-gray-400 leading-relaxed max-w-3xl mx-auto">
+            Join hundreds of satisfied clients who have transformed their businesses with our innovative solutions and exceptional service.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-          {benefits.map((benefit, index) => {
-            const Icon = benefit.icon
-            const isActive = activeCard === index
+        {/* Stats Grid */}
+        <div
+          className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20 transition-all duration-1000 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+          }`}
+          style={{ transitionDelay: "0.2s" }}
+        >
+          {stats.map((stat, index) => {
+            const Icon = stat.icon
             return (
               <Card
                 key={index}
-                className={`text-center p-6 transition-all duration-700 transform cursor-pointer group relative overflow-hidden ${
-                  isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-                } ${isActive ? "scale-105 shadow-2xl" : "hover:scale-105 shadow-lg hover:shadow-xl"}`}
-                style={{
-                  transitionDelay: `${index * 0.1}s`,
-                }}
-                onMouseEnter={() => setActiveCard(index)}
+                className="bg-white dark:bg-gray-800 border-0 shadow-sm hover:shadow-lg transition-all duration-500 hover:-translate-y-2 group text-center"
               >
-                {/* Gradient Background */}
-                <div
-                  className={`absolute inset-0 bg-gradient-to-br ${benefit.color} opacity-0 ${
-                    isActive ? "opacity-10" : "group-hover:opacity-5"
-                  } transition-opacity duration-500`}
-                ></div>
-
-                <CardContent className="pt-6 relative z-10">
-                  <div className="relative mb-4">
-                    <div
-                      className={`w-16 h-16 mx-auto rounded-full bg-gradient-to-br ${benefit.color} flex items-center justify-center shadow-lg ${
-                        isActive ? "animate-pulse" : "group-hover:scale-110"
-                      } transition-transform duration-300`}
-                    >
+                <CardContent className="p-8">
+                  <div className="flex items-center justify-center mb-4">
+                    <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${stat.color} flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
                       <Icon className="h-8 w-8 text-white" />
                     </div>
-                    {isActive && (
-                      <div className="absolute inset-0 bg-gradient-to-br from-orange-200 to-red-200 rounded-full scale-150 opacity-20 animate-ping"></div>
-                    )}
                   </div>
-                  <h3
-                    className={`text-lg font-semibold mb-3 transition-colors duration-300 ${
-                      isActive ? "text-orange-600" : "text-gray-900 group-hover:text-orange-600"
-                    }`}
-                  >
-                    {benefit.title}
-                  </h3>
-                  <p className="text-gray-600 leading-relaxed group-hover:text-gray-700 transition-colors duration-300">
-                    {benefit.description}
-                  </p>
+                  <div className="text-4xl font-bold text-gray-900 dark:text-white mb-2">
+                    {stat.value}
+                  </div>
+                  <div className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                    {stat.label}
+                  </div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400">
+                    {stat.description}
+                  </div>
                 </CardContent>
               </Card>
             )
           })}
         </div>
 
-        {/* Enhanced CTA Section */}
+        {/* Features Grid */}
         <div
-          className={`transition-all duration-1000 ${
+          className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20 transition-all duration-1000 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
-          style={{ transitionDelay: "0.8s" }}
+          style={{ transitionDelay: "0.4s" }}
         >
-          <div className="bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 rounded-2xl p-8 lg:p-12 text-white relative overflow-hidden">
-            {/* Animated Background Elements */}
-            <div className="absolute inset-0 opacity-20">
-              <div className="absolute top-0 left-0 w-32 h-32 bg-white rounded-full -translate-x-16 -translate-y-16 animate-pulse"></div>
-              <div
-                className="absolute bottom-0 right-0 w-24 h-24 bg-white rounded-full translate-x-12 translate-y-12 animate-pulse"
-                style={{ animationDelay: "1s" }}
-              ></div>
-            </div>
-
-            <div className="max-w-4xl mx-auto text-center relative z-10">
-              <h3 className="text-2xl lg:text-3xl font-bold mb-6">Ready to Transform Your Ideas into Reality?</h3>
-              <p className="text-xl mb-8 opacity-90 leading-relaxed">
-                Join the growing number of professionals and innovators who trust Komprotech to bring their vision to
-                life. Let's build something amazing together.
-              </p>
-              <div className="flex flex-wrap items-center justify-center gap-6">
-                {guarantees.map((guarantee, index) => (
-                  <div
-                    key={index}
-                    className={`flex items-center space-x-2 bg-white/20 backdrop-blur-sm rounded-full px-4 py-2 transition-all duration-500 hover:bg-white/30 hover:scale-105 ${
-                      isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
-                    }`}
-                    style={{ transitionDelay: `${1 + index * 0.1}s` }}
-                  >
-                    <CheckCircle className="h-5 w-5" />
-                    <span className="font-medium">{guarantee}</span>
+          {features.map((feature, index) => (
+            <Card
+              key={index}
+              className="bg-gray-50 dark:bg-gray-800 border-0 shadow-sm hover:shadow-md transition-all duration-300 group"
+            >
+              <CardContent className="p-8">
+                <div className="flex items-start gap-4">
+                  <div className="text-3xl mb-4 group-hover:scale-110 transition-transform duration-300">
+                    {feature.icon}
                   </div>
-                ))}
-              </div>
-            </div>
-          </div>
+                  <div className="flex-1">
+                    <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-3 group-hover:theme-primary transition-colors duration-300">
+                      {feature.title}
+                    </h3>
+                    <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+                      {feature.description}
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
         </div>
+
+        {/* Testimonials Section */}
+        <div
+          className={`max-w-4xl mx-auto transition-all duration-1000 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+          }`}
+          style={{ transitionDelay: "0.6s" }}
+        >
+          <div className="text-center mb-12">
+            <h3 className="text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mb-4">
+              What Our Clients Say
+            </h3>
+            <p className="text-lg text-gray-600 dark:text-gray-400">
+              Real feedback from businesses that have grown with our solutions
+            </p>
+          </div>
+
+          <Card className="bg-white dark:bg-gray-800 border-0 shadow-lg relative overflow-hidden">
+            <CardContent className="p-8 lg:p-12">
+              <div className="relative">
+                <div className="flex items-center gap-4 mb-6">
+                  <Avatar className="w-16 h-16">
+                    <AvatarImage src={testimonials[currentTestimonial].avatar} />
+                    <AvatarFallback className="bg-gradient-to-br from-orange-500 to-red-500 text-white text-lg font-bold">
+                      {testimonials[currentTestimonial].name.split(' ').map(n => n[0]).join('')}
+                    </AvatarFallback>
+                  </Avatar>
+                  <div>
+                    <h4 className="text-lg font-bold text-gray-900 dark:text-white">
+                      {testimonials[currentTestimonial].name}
+                    </h4>
+                    <p className="text-gray-600 dark:text-gray-400">
+                      {testimonials[currentTestimonial].role}
+                    </p>
+                    <Badge variant="outline" className="mt-1">
+                      {testimonials[currentTestimonial].company}
+                    </Badge>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-1 mb-6">
+                  {[...Array(testimonials[currentTestimonial].rating)].map((_, i) => (
+                    <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                  ))}
+                </div>
+
+                <blockquote className="text-xl text-gray-700 dark:text-gray-300 leading-relaxed italic">
+                  "{testimonials[currentTestimonial].content}"
+                </blockquote>
+
+                {/* Navigation */}
+                <div className="flex items-center justify-between mt-8">
+                  <div className="flex gap-2">
+                    {testimonials.map((_, index) => (
+                      <button
+                        key={index}
+                        onClick={() => setCurrentTestimonial(index)}
+                        className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                          index === currentTestimonial
+                            ? "theme-primary-bg w-8"
+                            : "bg-gray-300 dark:bg-gray-600"
+                        }`}
+                      />
+                    ))}
+                  </div>
+
+                  <div className="flex gap-2">
+                    <button
+                      onClick={prevTestimonial}
+                      className="w-10 h-10 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 flex items-center justify-center transition-colors duration-300"
+                    >
+                      <ChevronLeft className="w-5 h-5 text-gray-600 dark:text-gray-400" />
+                    </button>
+                    <button
+                      onClick={nextTestimonial}
+                      className="w-10 h-10 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 flex items-center justify-center transition-colors duration-300"
+                    >
+                      <ChevronRight className="w-5 h-5 text-gray-600 dark:text-gray-400" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+
+      {/* Background Elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-10">
+        <div className="absolute top-40 left-20 w-72 h-72 theme-gradient rounded-full blur-3xl"></div>
+        <div className="absolute bottom-40 right-20 w-72 h-72 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full blur-3xl"></div>
       </div>
     </section>
   )

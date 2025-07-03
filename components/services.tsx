@@ -1,23 +1,23 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import {
-  BarChart3,
   Code,
-  Database,
+  Brain,
   Smartphone,
-  ArrowRight,
   Gamepad2,
   Search,
-  FileText,
   PenTool,
+  ArrowRight,
+  CheckCircle,
+  Sparkles,
 } from "lucide-react";
 
 export function Services() {
   const [isVisible, setIsVisible] = useState(false);
-  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -37,100 +37,6 @@ export function Services() {
     return () => observer.disconnect();
   }, []);
 
-  const services = [
-    {
-      icon: Code,
-      title: "Software Development",
-      description:
-        "End-to-end custom software development tailored to your business needs, delivering scalable and efficient digital solutions.",
-      features: [
-        "Bespoke web & desktop apps",
-        "Third-party API integrations",
-        "Secure backend development",
-        "Scalable system architecture",
-      ],
-      color: "from-blue-500 to-cyan-500",
-    },
-    {
-      icon: BarChart3,
-      title: "Intelligent Solutions",
-      description:
-        "Smart solutions powered by AI, machine learning, and automation to solve complex business problems and enhance decision-making.",
-      features: [
-        "AI-powered automation",
-        "Predictive analytics",
-        "Business process intelligence",
-        "Custom ML model deployment",
-      ],
-      color: "from-green-500 to-emerald-500",
-    },
-    {
-      icon: Smartphone,
-      title: "Mobile Application",
-      description:
-        "Design and development of high-performance mobile apps with smooth user experience across Android and iOS platforms.",
-      features: [
-        "Cross-platform development",
-        "Intuitive UI/UX design",
-        "Real-time data sync",
-        "Push notifications & APIs",
-      ],
-      color: "from-pink-500 to-rose-500",
-    },
-    {
-      icon: Gamepad2,
-      title: "Game Development",
-      description:
-        "Creative and engaging game development solutions for mobile, web, and desktop platforms using the latest gaming engines.",
-      features: [
-        "2D & 3D game creation",
-        "Unity/Unreal Engine support",
-        "Multiplayer integration",
-        "Interactive UI & storytelling",
-      ],
-      color: "from-yellow-500 to-orange-500",
-    },
-    {
-      icon: Search,
-      title: "SEO",
-      description:
-        "Boost your online visibility and drive organic traffic with proven SEO strategies tailored to your business goals.",
-      features: [
-        "Keyword research & optimization",
-        "On-page & off-page SEO",
-        "Technical SEO audit",
-        "Monthly performance reports",
-      ],
-      color: "from-indigo-500 to-blue-500",
-    },
-    {
-      icon: FileText,
-      title: "Content Creation",
-      description:
-        "Professional content creation services that capture your brand voice and engage your target audience effectively.",
-      features: [
-        "SEO-optimized blogs & articles",
-        "Scriptwriting & storytelling",
-        "Social media content",
-        "Copywriting for landing pages",
-      ],
-      color: "from-purple-500 to-violet-500",
-    },
-    {
-      icon: PenTool,
-      title: "Logo Design",
-      description:
-        "Unique, memorable, and scalable logo designs that represent your brand identity across all platforms.",
-      features: [
-        "Custom vector logos",
-        "Brand guidelines creation",
-        "Multiple design concepts",
-        "High-res & source files provided",
-      ],
-      color: "from-red-500 to-pink-500",
-    },
-  ];
-
   const scrollToContact = () => {
     const element = document.getElementById("contact");
     if (element) {
@@ -138,132 +44,194 @@ export function Services() {
     }
   };
 
+  const services = [
+    {
+      icon: Code,
+      title: "Software Development",
+      description: "Custom web applications, enterprise software, and digital transformation solutions built with modern technologies.",
+      features: ["Full-stack development", "Cloud architecture", "API integrations", "Performance optimization"],
+      badge: "Popular",
+      badgeColor: "bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300",
+      color: "from-blue-500 to-cyan-500"
+    },
+    {
+      icon: Brain,
+      title: "Intelligent Solutions", 
+      description: "AI-powered applications, machine learning models, and intelligent automation systems for business optimization.",
+      features: ["Machine Learning", "AI chatbots", "Data analytics", "Process automation"],
+      badge: "New",
+      badgeColor: "bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300",
+      color: "from-purple-500 to-pink-500"
+    },
+    {
+      icon: Smartphone,
+      title: "Mobile Application",
+      description: "Native and cross-platform mobile apps that deliver exceptional user experiences across all devices.",
+      features: ["iOS & Android", "React Native", "App Store optimization", "Push notifications"],
+      badge: null,
+      badgeColor: "",
+      color: "from-green-500 to-teal-500"
+    },
+    {
+      icon: Gamepad2,
+      title: "Game Development",
+      description: "Interactive games and gamification solutions that engage users and drive business objectives.",
+      features: ["Unity & Unreal", "2D/3D games", "Multiplayer systems", "Cross-platform"],
+      badge: null,
+      badgeColor: "",
+      color: "from-orange-500 to-red-500"
+    },
+    {
+      icon: Search,
+      title: "SEO Optimization",
+      description: "Comprehensive SEO strategies to improve search rankings and drive organic traffic to your website.",
+      features: ["Keyword research", "On-page SEO", "Technical SEO", "Performance tracking"],
+      badge: null,
+      badgeColor: "",
+      color: "from-yellow-500 to-orange-500"
+    },
+    {
+      icon: PenTool,
+      title: "Content Creation",
+      description: "High-quality content strategy, copywriting, and visual design that tells your brand story effectively.",
+      features: ["Content strategy", "Copywriting", "Visual design", "Brand storytelling"],
+      badge: null,
+      badgeColor: "",
+      color: "from-indigo-500 to-purple-500"
+    }
+  ];
+
   return (
     <section
       id="services"
       ref={sectionRef}
-      className="py-20 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden"
+      className="py-24 bg-white dark:bg-gray-950 relative overflow-hidden"
     >
-      {/* Animated Background */}
-      <div className="absolute inset-0 opacity-30">
-        <div className="absolute top-20 left-10 w-32 h-32 bg-orange-200 rounded-full animate-pulse"></div>
-        <div
-          className="absolute bottom-20 right-10 w-24 h-24 bg-blue-200 rounded-full animate-pulse"
-          style={{ animationDelay: "1s" }}
-        ></div>
-        <div
-          className="absolute top-1/2 left-1/4 w-16 h-16 bg-green-200 rounded-full animate-pulse"
-          style={{ animationDelay: "2s" }}
-        ></div>
-      </div>
-
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        {/* Header */}
         <div
-          className={`max-w-3xl mx-auto text-center mb-16 transition-all duration-1000 ${
+          className={`max-w-4xl mx-auto text-center mb-20 transition-all duration-1000 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
         >
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">
+          <div className="inline-flex items-center gap-2 bg-gray-50 dark:bg-gray-800 text-gray-600 dark:text-gray-400 rounded-full px-4 py-2 text-sm font-medium mb-6">
+            <Sparkles className="w-4 h-4" />
+            Comprehensive Tech Solutions
+          </div>
+          
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-6">
             Our Services
           </h2>
-          <p className="text-xl text-gray-600 leading-relaxed">
-            We offer comprehensive tech solutions designed to transform your
-            logistics operations and drive business growth through innovation
-            and efficiency.
+          
+          <p className="text-xl sm:text-2xl text-gray-600 dark:text-gray-400 leading-relaxed max-w-3xl mx-auto">
+            From concept to deployment, we provide end-to-end technology solutions that drive your business forward.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+        {/* Services Grid */}
+        <div
+          className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20 transition-all duration-1000 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+          }`}
+          style={{ transitionDelay: "0.2s" }}
+        >
           {services.map((service, index) => {
             const Icon = service.icon;
             return (
               <Card
                 key={index}
-                className={`h-full transition-all duration-500 transform hover:scale-105 cursor-pointer group relative overflow-hidden ${
-                  isVisible
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-0 translate-y-10"
-                } ${
-                  hoveredCard === index
-                    ? "shadow-2xl"
-                    : "shadow-lg hover:shadow-xl"
-                }`}
-                style={{
-                  transitionDelay: `${index * 0.1}s`,
-                }}
-                onMouseEnter={() => setHoveredCard(index)}
-                onMouseLeave={() => setHoveredCard(null)}
+                className="bg-white dark:bg-gray-800 border-0 shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-2 group"
               >
-                {/* Gradient Background on Hover */}
-                <div
-                  className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500`}
-                ></div>
-
-                <CardHeader className="relative z-10">
-                  <div className="flex items-center justify-between mb-4">
-                    <div
-                      className={`p-3 rounded-xl bg-gradient-to-br ${service.color} shadow-lg group-hover:scale-110 transition-transform duration-300`}
-                    >
-                      <Icon className="h-8 w-8 text-white" />
+                <CardHeader className="pb-4">
+                  <div className="flex items-start justify-between mb-4">
+                    <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${service.color} flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
+                      <Icon className="h-7 w-7 text-white" />
                     </div>
-                    <div
-                      className={`w-2 h-2 rounded-full bg-gradient-to-r ${service.color} animate-pulse`}
-                    ></div>
+                    {service.badge && (
+                      <Badge className={`${service.badgeColor} border-0`}>
+                        {service.badge}
+                      </Badge>
+                    )}
                   </div>
-                  <CardTitle className="text-xl text-gray-900 group-hover:text-gray-800 transition-colors duration-300">
+                  
+                  <CardTitle className="text-xl font-bold text-gray-900 dark:text-white group-hover:theme-primary transition-colors duration-300">
                     {service.title}
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="relative z-10">
-                  <p className="text-gray-600 mb-6 leading-relaxed group-hover:text-gray-700 transition-colors duration-300">
+
+                <CardContent className="pt-0">
+                  <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-6">
                     {service.description}
                   </p>
-                  <ul className="space-y-3">
+
+                  <div className="space-y-3 mb-6">
                     {service.features.map((feature, featureIndex) => (
-                      <li
-                        key={featureIndex}
-                        className={`flex items-start transition-all duration-300 ${
-                          hoveredCard === index ? "translate-x-2" : ""
-                        }`}
-                        style={{ transitionDelay: `${featureIndex * 50}ms` }}
-                      >
-                        <div
-                          className={`w-2 h-2 rounded-full bg-gradient-to-r ${service.color} mt-2 mr-3 flex-shrink-0`}
-                        ></div>
-                        <span className="text-gray-700 text-sm">{feature}</span>
-                      </li>
+                      <div key={featureIndex} className="flex items-center gap-3">
+                        <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0" />
+                        <span className="text-sm text-gray-700 dark:text-gray-300 font-medium">{feature}</span>
+                      </div>
                     ))}
-                  </ul>
+                  </div>
+
+                  <Button
+                    onClick={scrollToContact}
+                    variant="outline"
+                    className="w-full group-hover:theme-primary-bg group-hover:text-white group-hover:border-transparent transition-all duration-300"
+                  >
+                    Get Started
+                    <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
+                  </Button>
                 </CardContent>
               </Card>
             );
           })}
         </div>
 
-        {/* Call to Action */}
+        {/* CTA Section */}
         <div
           className={`text-center transition-all duration-1000 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
-          style={{ transitionDelay: "0.8s" }}
+          style={{ transitionDelay: "0.4s" }}
         >
-          <div className="bg-white rounded-2xl p-8 shadow-xl border border-gray-100 max-w-2xl mx-auto">
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">
-              Ready to Transform Your Operations?
-            </h3>
-            <p className="text-gray-600 mb-6 leading-relaxed">
-              Let's discuss how our innovative solutions can streamline your
-              logistics and drive your business forward.
-            </p>
-            <Button
-              onClick={scrollToContact}
-              className="bg-gradient-to-r from-orange-500 to-red-500 text-white hover:from-orange-600 hover:to-red-600 px-8 py-3 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl group"
-            >
-              Get Started Today
-              <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
-            </Button>
-          </div>
+          <Card className="bg-gradient-to-br from-gray-50 to-white dark:from-gray-800 dark:to-gray-900 border-0 shadow-lg max-w-4xl mx-auto">
+            <CardContent className="p-8 lg:p-12">
+              <h3 className="text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mb-4">
+                Ready to Transform Your Business?
+              </h3>
+              <p className="text-lg text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
+                Let's discuss your project requirements and create a custom solution that drives real business results.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <Button
+                  size="lg"
+                  onClick={scrollToContact}
+                  className="theme-primary-bg hover:theme-accent-bg text-white px-8 py-4 h-12 font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 group"
+                >
+                  Start Your Project
+                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
+                </Button>
+                
+                <Button
+                  variant="outline"
+                  size="lg"
+                  onClick={scrollToContact}
+                  className="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-900 dark:text-white border-gray-300 dark:border-gray-600 px-8 py-4 h-12 font-semibold rounded-xl transition-all duration-300"
+                >
+                  Schedule Consultation
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
         </div>
+      </div>
+
+      {/* Background Elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-10">
+        <div className="absolute top-40 left-20 w-72 h-72 theme-gradient rounded-full blur-3xl"></div>
+        <div className="absolute bottom-40 right-20 w-72 h-72 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full blur-3xl"></div>
       </div>
     </section>
   );
